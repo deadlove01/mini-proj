@@ -26,7 +26,7 @@ const useStyles = makeStyles({
   },
 });
 
-const CommentCreate = ({ id, title }) => {
+const CommentCreate = ({ id, title, comments }) => {
   const classes = useStyles();
   const [content, setContent] = useState("");
 
@@ -49,7 +49,7 @@ const CommentCreate = ({ id, title }) => {
         <Typography variant="body2" component="p">
           some cool content here.
         </Typography> */}
-        <CommentList title={title} postId={id} />
+        <CommentList title={title} postId={id} comments={comments} />
       </CardContent>
       <CardActions>
         <form onSubmit={handleSubmit}>

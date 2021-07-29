@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { Grid, TextField, Typography } from "@material-ui/core";
-import axios from 'axios'
+import axios from "axios";
+import { addPostsAsync } from "../utils/axiosUtils";
 
 const PostCreate = () => {
   const inputRef = useRef(null);
@@ -9,9 +10,10 @@ const PostCreate = () => {
     e.preventDefault();
     const title = inputRef.current.value;
 
-    await axios.post("http://localhost:4000/posts", {
-      title,
-    });
+    await addPostsAsync({ title });
+    // await axios.post("http://localhost:7000/posts", {
+    //   title,
+    // });
     inputRef.current.value = "";
   };
 

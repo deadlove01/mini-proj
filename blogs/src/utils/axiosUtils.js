@@ -4,7 +4,7 @@ const POST_BASE_URL = "http://localhost:4000";
 const COMMENT_BASE_URL = "http://localhost:5000";
 
 const findAllPostsAsync = async () => {
-  return await axios.get(`${POST_BASE_URL}/posts`);
+  return await axios.get(`http://localhost:7000/posts`);
 };
 
 const addPostsAsync = async (payload) => {

@@ -20,24 +20,34 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CommentList = ({ postId, title }) => {
+const CommentList = ({ postId, title, comments }) => {
   const classes = useStyles();
 
-  const [comments, setComments] = useState([]);
+  // const [comments, setComments] = useState([]);
 
-  const fetchComments = async () => {
-    const res = await findAllCommentsAsync({ id: postId });
-    setComments(res.data);
-  };
+  // const fetchComments = async () => {
+  //   const res = await findAllCommentsAsync({ id: postId });
+  //   setComments(res.data);
+  // };
 
-  useEffect(() => {
-    fetchComments();
-  }, []);
+  // useEffect(() => {
+  //   fetchComments();
+  // }, []);
 
   const renderedComments = () => {
     return (
       <>
         {comments.map((item) => {
+          let content = "";
+          if (item.status === "pending") {
+            content = "waiting for review";
+          }
+          if (item.status === "rejected") {
+            content = "rejected";
+          }
+          if (item.status === "approved") {
+            content = item.content;
+          }
           return (
             <div key={item.id}>
               <Divider variant="inset" component="li" />
@@ -52,7 +62,7 @@ const CommentList = ({ postId, title }) => {
                         className={classes.inline}
                         color="textPrimary"
                       >
-                        {item.content}
+                        {content}
                       </Typography>
                     </React.Fragment>
                   }
