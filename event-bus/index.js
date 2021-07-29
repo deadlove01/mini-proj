@@ -10,10 +10,10 @@ const PORT = 8888;
 
 const events = [];
 const subscribers = [
-  "http://localhost:4000",
-  "http://localhost:5000",
-  "http://localhost:6000",
-  "http://localhost:7000",
+  "http://posts-service:4000",
+  "http://comments-service:5000",
+  "http://moderated-service:6000",
+  "http://query-service:7000",
 ];
 
 app.get("/events", (req, res) => {
@@ -27,10 +27,6 @@ app.post("/events", (req, res) => {
     console.log(" call url: " + sub);
     axios.post(sub + "/events", event);
   });
-  // axios.post("http://localhost:5000/events", event);
-  // axios.post("http://localhost:6000/events", event);
-  // axios.post("http://localhost:7000/events", event);
-  // axios.post("http://localhost:4000/events", event);
   res.send({});
 });
 

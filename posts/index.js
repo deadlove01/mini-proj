@@ -16,12 +16,12 @@ app.get("/posts", (req, res) => {
   res.send(posts);
 });
 
-app.post("/posts", (req, res) => {
+app.post("/posts/create", (req, res) => {
   const id = uuidv4();
   const { title } = req.body;
   posts[id] = { id, title };
 
-  axios.post("http://localhost:8888/events", {
+  axios.post("http://event-bus-service:8888/events", {
     type: "PostCreated",
     data: { id, title },
   });
@@ -37,5 +37,6 @@ app.post("/events", (req, res) => {
 });
 
 app.listen(PORT, () => {
+  console.log("update v3");
   console.log("posts services is listening to port: " + PORT);
 });

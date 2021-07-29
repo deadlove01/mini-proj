@@ -24,7 +24,7 @@ app.post("/posts/:id/comments", (req, res) => {
   const comments = commentsByPostId[postId] || [];
   comments.push({ id: commentId, content });
   commentsByPostId[postId] = comments;
-  axios.post("http://localhost:8888/events", {
+  axios.post("http://event-bus-service:8888/events", {
     type: "CommentCreated",
     data: { id: commentId, content, postId, status: "pending" },
   });
@@ -44,7 +44,7 @@ app.post("/events", (req, res) => {
 
     // const comment = commments.find((x) => x.id === id);
     comment.status = status;
-    axios.post("http://localhost:8888/events", {
+    axios.post("http://event-bus-service:8888/events", {
       type: "CommentUpdated",
       data: {
         id,

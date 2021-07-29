@@ -15,7 +15,7 @@ const handleCommentCreated = (type, data) => {
   if (type === "CommentCreated" && data.status === "pending") {
     const { id, content, postId } = data;
     const status = content.includes("orange") ? "rejected" : "approved";
-    axios.post("http://localhost:8888/events", {
+    axios.post("http://event-bus-service:8888/events", {
       type: "CommentModerated",
       data: {
         id,
@@ -45,7 +45,7 @@ app.post("/events", (req, res) => {
 app.listen(PORT, async () => {
   console.log("services is listening to port: " + PORT);
 
-  const res = await axios.get("http://localhost:8888/events");
+  const res = await axios.get("http://event-bus-service:8888/events");
   console.log(res.data);
   const events = Object.values(res.data);
   events.forEach((item) => {

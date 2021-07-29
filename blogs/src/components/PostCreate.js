@@ -11,9 +11,6 @@ const PostCreate = () => {
     const title = inputRef.current.value;
 
     await addPostsAsync({ title });
-    // await axios.post("http://localhost:7000/posts", {
-    //   title,
-    // });
     inputRef.current.value = "";
   };
 
