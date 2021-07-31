@@ -16,7 +16,7 @@ const PostCreate = () => {
 
   return (
     <Grid item xs={12} sm={8}>
-      <Typography variant="h3">Create Post</Typography>
+      <Typography variant="h3">Create Post !!!</Typography>
       <form onSubmit={handleSubmit}>
         <TextField
           inputRef={inputRef}

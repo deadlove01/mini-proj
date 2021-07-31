@@ -1,0 +1,87 @@
+apiVersion: skaffold/v2beta19
+kind: Config
+metadata:
+  name: mini-proj
+deploy:
+  kubectl:
+    manifests:
+      - ./infra/k8s/*
+portForward:
+  - resourceType: service
+    resourceName: client-service
+    port: 3000
+    localPort: 80
+  - resourceType: service
+    resourceName: event-bus-service
+    port: 8888
+    localPort: 8888
+  - resourceType: service
+    resourceName: posts-service
+    port: 4000
+    localPort: 4000
+  - resourceType: service
+    resourceName: comments-service
+    port: 5000
+    localPort: 5000
+  - resourceType: service
+    resourceName: moderated-service
+    port: 6000
+    localPort: 6000
+  - resourceType: service
+    resourceName: query-service
+    port: 7000
+    localPort: 7000
+build:
+  artifacts:
+    - image: ravi113/posts
+      context: posts
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "*.js"
+            dest: .
+    - image: ravi113/comments
+      context: comments
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "*.js"
+            dest: .
+    - image: ravi113/moderated
+      context: commentModerated
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "*.js"
+            dest: .
+    - image: ravi113/query
+      context: queries
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "*.js"
+            dest: .
+    - image: ravi113/event-bus
+      context: event-bus
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "*.js"
+            dest: .
+    - image: ravi113/client
+      context: blogs
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "src/components/*.js"
+            dest: .
+          - src: "src/utils/*.js"
+            dest: .
+          - src: "src/*.js"
+            dest: .

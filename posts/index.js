@@ -37,6 +37,7 @@ app.post("/events", (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log("update v3");
+  console.log("update v4");
+  console.log("apply skaffold");
   console.log("posts services is listening to port: " + PORT);
 });
